@@ -1,7 +1,9 @@
 package com.example.intent;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -295,14 +297,38 @@ public class HangmanActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void gameOver() {
-        if (isDone()) {
-            tvGameover.setText("VICTORY");
-        }
-        tvGameover.setVisibility(TextView.VISIBLE);
-        btnReplay.setVisibility(Button.VISIBLE);
+//        if (isDone()) {
+//            tvGameover.setText("VICTORY");
+//        }
+//        tvGameover.setVisibility(TextView.VISIBLE);
+//        btnReplay.setVisibility(Button.VISIBLE);
+//
+//        llKeyboard.setVisibility(LinearLayout.INVISIBLE);
+//        llAnswer.setVisibility(LinearLayout.INVISIBLE);
 
-        llKeyboard.setVisibility(LinearLayout.INVISIBLE);
-        llAnswer.setVisibility(LinearLayout.INVISIBLE);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        if (isDone()) {
+            builder.setTitle("정답입니다!");
+        } else {
+            builder.setTitle("오답입니다..");
+        }
+        builder.setMessage("다시 플레이 하시겠습니까?");
+
+        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                replay();
+                setup();
+            }
+        });
+        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        builder.create().show();
     }
 
     private void guess(String ch) {

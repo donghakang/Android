@@ -54,6 +54,11 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         btnClick.setOnClickListener(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setVocab();
+    }
 
     @Override
     public void onClick(View v) {
