@@ -27,10 +27,20 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
-            android:text="단어 게임"
+            android:text="단어 퀴즈"
             android:textSize="32sp"
 
             android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btn_hangman"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="행맨 게임"
+            android:textSize="32sp"
+            android:layout_weight="1"/>
+
         <Button
             android:id="@+id/btn_exit"
             android:layout_width="300dp"

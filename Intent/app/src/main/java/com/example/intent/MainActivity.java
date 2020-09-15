@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnVocab;
     Button btnGame;
     Button btnExit;
+    Button btnHangman;
 
 
     @Override
@@ -25,10 +27,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnVocab = findViewById(R.id.btn_vocab);
         btnGame  = findViewById(R.id.btn_game);
         btnExit  = findViewById(R.id.btn_exit);
+        btnHangman = findViewById(R.id.btn_hangman);
 
         btnVocab.setOnClickListener(this);
         btnGame.setOnClickListener(this);
         btnExit.setOnClickListener(this);
+        btnHangman.setOnClickListener(this);
     }
 
     @Override
@@ -40,8 +44,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.btn_game:
-                intent = new Intent(this, com.example.intent.GameActivity.class);
-                startActivity(intent);
+                if (Storage.vocaArr.size() == 0) {
+                    Toast.makeText(this, "먼저 단어장에 단어를 입력하세요", Toast.LENGTH_LONG).show();
+                } else {
+                    intent = new Intent(this, com.example.intent.GameActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.btn_hangman:
+                if (Storage.vocaArr.size() == 0) {
+                    Toast.makeText(this, "먼저 단어장에 단어를 입력하세요", Toast.LENGTH_LONG).show();
+                } else {
+                    intent = new Intent(this, com.example.intent.HangmanActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.btn_exit:
                 finish();
