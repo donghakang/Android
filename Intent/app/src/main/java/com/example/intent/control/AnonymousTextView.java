@@ -1,4 +1,4 @@
-package com.example.intent;
+package com.example.intent.control;
 
 import android.graphics.Typeface;
 import android.util.Log;

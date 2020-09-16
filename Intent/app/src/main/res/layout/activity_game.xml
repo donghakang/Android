@@ -5,22 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".GameActivity">
+    tools:context=".activity.GameActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3">
-        <TextView
-            android:id="@+id/tv_score"
+        <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/btn_change"
             android:layout_centerVertical="true"
-            android:text="점수: "
             android:layout_marginLeft="40dp"
-            android:textSize="32sp"
-            android:textColor="#ff0000"/>
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="시간: "
+                android:textSize="32sp"
+                android:textColor="#ff0000"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="점수: "
+
+                android:textSize="32sp"
+                android:textColor="#ff0000"/>
+
+        </LinearLayout>
+
         <Button
             android:id="@+id/btn_change"
             android:layout_width="wrap_content"
@@ -28,7 +46,6 @@
             android:layout_marginRight="40dp"
             android:layout_height="100dp"
             android:layout_alignParentRight="true"
-
 
             android:text="변환"/>
 

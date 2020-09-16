@@ -1,4 +1,4 @@
-package com.example.intent;
+package com.example.intent.control;
 
 import java.util.ArrayList;
 

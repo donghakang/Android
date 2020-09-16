@@ -1,9 +1,12 @@
-package com.example.intent;
+package com.example.intent.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,12 +14,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.intent.R;
+import com.example.intent.control.Storage;
+
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvWord;
     TextView tvScore;
+    TextView tvTime;
     Button btnChange;
     EditText etWord;
     Button btnSubmit;
@@ -26,6 +33,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     int pos = 0;
     int score = 0;
     int totalVocab;
+    int time = 0;
+
 
 
     private void updateOrder(int count) {
@@ -62,6 +71,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void reset() {
+        time = 0;
         pos = 0;
         totalVocab = Storage.vocaArr.size();
         updateOrder(totalVocab);                    // pick random 10 words (or less)
@@ -70,6 +80,32 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         tvScore.setText("점수 : " + score + " / " + totalVocab);  // quiz pop up
     }
 
+
+    final Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+
+            if (time == 10) {
+                // 만약 시간 10초가 넘어가면, 다음 문제로 전환
+                Toast.makeText(GameActivity.this, "오답입니다", Toast.LENGTH_SHORT).show();
+                time = 0;
+                pos += 1;
+                updateQuiz();
+            }
+
+            time += 1;
+            tvTime.setText("시간 : " + time + " sec");
+            handler.sendEmptyMessageDelayed(0, 1000);
+
+        }
+    };
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +113,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         tvWord = findViewById(R.id.tv_word);
         tvScore = findViewById(R.id.tv_score);
+        tvTime = findViewById(R.id.tv_time);
         btnChange = findViewById(R.id.btn_change);
         btnSubmit = findViewById(R.id.btn_submit);
         etWord = findViewById(R.id.et_word);
@@ -90,20 +127,24 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
 
         reset();
+        handler.sendEmptyMessage(0);
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_submit) {
-
             if (engMode) {
                 String currentKor = Storage.vocaArr.get(orderArr[pos]).kor;
                 if (etWord.getText().toString().equals(currentKor)) {
                     // 정답을 맞추다
                     score += 1;
                     Toast.makeText(this, "정답입니다", Toast.LENGTH_SHORT).show();
+                    time = 0;
+                    handler.removeMessages(0);
+                    handler.sendEmptyMessage(0);
                 } else {
                     Toast.makeText(this, "오답입니다", Toast.LENGTH_SHORT).show();
+
                 }
                 tvScore.setText("점수 : " + score + " / " + totalVocab);
 
@@ -113,15 +154,22 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     // 정답을 맞추다
                     score += 1;
                     Toast.makeText(this, "정답입니다", Toast.LENGTH_SHORT).show();
+                    time = 0;
+                    handler.removeMessages(0);
+                    handler.sendEmptyMessage(0);
                 } else {
                     Toast.makeText(this, "오답입니다", Toast.LENGTH_SHORT).show();
                 }
                 tvScore.setText("점수 : " + score + " / " + totalVocab);
             }
             pos += 1;
-            if (pos == totalVocab) {
+
+
+
+            if (pos > totalVocab) {
+                Log.d("MESSAGE", pos + "     " + totalVocab);
                 // 게임 종료
-                Intent intent = new Intent(this, com.example.intent.MainActivity.class);
+                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 Toast.makeText(this, "최종 스코어 " + score + " / " + totalVocab, Toast.LENGTH_LONG).show();
                 finish();
@@ -133,7 +181,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         } else if (v.getId() == R.id.btn_change) {
             engMode = !engMode;
-            updateQuiz();
+//            updateQuiz();
+            handler.removeMessages(0);
+            handler.sendEmptyMessage(0);
+            reset();
         }
     }
 }

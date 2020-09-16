@@ -1,8 +1,8 @@
-package com.example.intent;
+package com.example.intent.control;
 
 public class Voca {
-    String eng;
-    String kor;
+    public String eng;
+    public String kor;
 
     public Voca(String eng, String kor) {
         this.eng = eng;

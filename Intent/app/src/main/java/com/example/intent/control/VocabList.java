@@ -1,4 +1,4 @@
-package com.example.intent;
+package com.example.intent.control;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.intent.R;
 
 import java.util.ArrayList;
 
