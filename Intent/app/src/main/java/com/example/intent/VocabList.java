@@ -29,6 +29,7 @@ public class VocabList extends ArrayAdapter<String> {
         TextView txtEng = (TextView) rowView.findViewById(R.id.id_eng);
         TextView txtKor = (TextView) rowView.findViewById(R.id.id_kor);
 
+
         txtEng.setText(eng.get(position));
         txtKor.setText(kor.get(position));
 

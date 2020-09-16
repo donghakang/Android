@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Log.d("DEBUGGING", "i: " + i + "번");
+
     }
 
 }

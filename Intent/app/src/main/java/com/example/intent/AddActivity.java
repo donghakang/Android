@@ -1,7 +1,9 @@
 package com.example.intent;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,16 +34,11 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     ArrayList<String> kor = new ArrayList<>();
     ArrayList<String> vocab = new ArrayList<>();
 
+    int pos = -1;
+
     private void setVocab() {
 //        String english = "";
 //        String korean = "";
-//        for (int i = 0; i < Storage.vocaArr.size(); i++) {
-//            Voca v = Storage.vocaArr.get(i);
-//            english += v.eng + "\n";
-//            korean += v.kor + "\n";
-//
-//        }
-
 
         VocabList adapter = new VocabList(this, this.eng, this.kor);
 //        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, this.eng);
@@ -67,7 +64,6 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             }
         }
 
-
         etEnglish = findViewById(R.id.et_english);
         etKorean  = findViewById(R.id.et_korean);
 
@@ -89,29 +85,75 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_click) {
-            try {
-                String kor = etKorean.getText().toString();
-                String eng = etEnglish.getText().toString();
+            if (pos == -1) {
+                try {
+                    String kor = etKorean.getText().toString();
+                    String eng = etEnglish.getText().toString();
 
-                this.eng.add(eng);
-                this.kor.add(kor);
-                this.vocab.add(eng + "\n" + kor);
+                    this.eng.add(eng);
+                    this.kor.add(kor);
+                    this.vocab.add(eng + "\n" + kor);
 
-                Voca voca = new Voca (eng, kor);
-                Storage.vocaArr.add(voca);
+                    Voca voca = new Voca (eng, kor);
+                    Storage.vocaArr.add(voca);
 
 
-                setVocab();
+                    setVocab();
 
-                Toast.makeText(this, "등록이 완료되었습니다", Toast.LENGTH_SHORT).show();
-            } catch (NullPointerException e) {
-                Toast.makeText(this, "입력하세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "등록이 완료되었습니다", Toast.LENGTH_SHORT).show();
+                } catch (NullPointerException e) {
+                    Toast.makeText(this, "입력하세요", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                try {
+                    String kor = etKorean.getText().toString();
+                    String eng = etEnglish.getText().toString();
+
+                    this.eng.set(pos, eng);
+                    this.kor.set(pos, kor);
+
+                    Voca voca = new Voca (eng, kor);
+                    Storage.vocaArr.set(pos, voca);
+
+
+                    setVocab();
+
+                    pos = -1;
+
+                    Toast.makeText(this, "등록이 완료되었습니다", Toast.LENGTH_SHORT).show();
+                } catch (NullPointerException e) {
+                    Toast.makeText(this, "입력하세요", Toast.LENGTH_SHORT).show();
+                }
             }
+
         }
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, this.kor.get(position), Toast.LENGTH_SHORT).show();
+    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setTitle("잠시만요!");
+        builder.setMessage("이 단어를 수정/삭제 하시겠습니까?");
+        builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Storage.vocaArr.remove(position);
+                eng.remove(position);
+                kor.remove(position);
+                setVocab();
+            }
+        });
+
+        builder.setNegativeButton("수정", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                etEnglish.setText(eng.get(position));
+                etKorean.setText(kor.get(position));
+                pos = position;
+            }
+        });
+
+        builder.create().show();
     }
 }
