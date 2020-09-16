@@ -310,7 +310,7 @@ public class HangmanActivity extends AppCompatActivity implements View.OnClickLi
         if (isDone()) {
             builder.setTitle("정답입니다!");
         } else {
-            builder.setTitle("오답입니다..");
+            builder.setTitle("오답입니다.." + answer);
         }
         builder.setMessage("다시 플레이 하시겠습니까?");
 
