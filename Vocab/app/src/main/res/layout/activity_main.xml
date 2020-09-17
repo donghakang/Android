@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2B2B2B"
+    tools:context="view.MainActivity">
+
+    <TextView
+        android:textColor="#999999"
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VOCAB"
+        android:textSize="64sp"
+        android:layout_centerInParent="true"/>
+
+
+    <LinearLayout
+        android:layout_below="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_add"
+            android:background="#cccccc"
+            android:shadowColor="#666666"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:text="단어 넣기"/>
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_margin="20dp"-->
+<!--            android:text="단어 보기"/>-->
+        <Button
+            android:id="@+id/btn_quiz"
+            android:background="#cccccc"
+            android:shadowColor="#666666"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:text="단어 퀴즈"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

@@ -19,14 +19,26 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="40dp"
             android:orientation="vertical">
-            <TextView
+<!--            <TextView-->
+<!--                android:id="@+id/tv_time"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="시간: "-->
+<!--                android:textSize="32sp"-->
+<!--                android:textColor="#ff0000"-->
+<!--                android:layout_marginBottom="20dp"/>-->
+
+            <ProgressBar
                 android:id="@+id/tv_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="시간: "
-                android:textSize="32sp"
-                android:textColor="#ff0000"
-                android:layout_marginBottom="20dp"/>
+                style="?android:attr/progressBarStyleHorizontal"
+                android:max="100"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="32dp"/>
+
+
+
 
             <TextView
                 android:id="@+id/tv_score"

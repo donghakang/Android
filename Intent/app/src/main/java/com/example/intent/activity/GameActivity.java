@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +24,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView tvWord;
     TextView tvScore;
-    TextView tvTime;
+
+    ProgressBar tvTime;
+
     Button btnChange;
     EditText etWord;
     Button btnSubmit;
@@ -95,8 +98,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             time += 1;
-            tvTime.setText("시간 : " + time + " sec");
-            handler.sendEmptyMessageDelayed(0, 1000);
+//            tvTime.setText("시간 : " + time + " sec");
+            tvTime.setProgress(time);
+
+            handler.sendEmptyMessageDelayed(0, 100);
 
         }
     };
