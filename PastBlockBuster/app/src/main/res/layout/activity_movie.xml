@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#162855"
+    tools:context=".MovieActivity">
+
+    <TextView
+        android:id="@+id/movie_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:text="영화이름"
+        android:textSize="64sp"
+        android:fontFamily="@font/ssangmoondong"
+        android:textColor="#FFC107"/>
+
+    <LinearLayout
+        android:id="@+id/audience_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/movie_name"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/audience"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="당일 관객수: "
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/ssangmoondong"/>
+        <TextView
+            android:id="@+id/cumulative_audience"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="누적 관객수: "
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/ssangmoondong"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        android:layout_below="@+id/audience_layout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="영화 감독: "
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/ssangmoondong"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="출연 배우: "
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/ssangmoondong"/>
+        <TextView
+            android:id="@+id/movie_actor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="송강호 "
+            android:textSize="20sp"
+            android:textColor="#FFEB3B"
+            android:fontFamily="@font/ssangmoondong"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:text="상영 시간: "
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/ssangmoondong"/>
+        <TextView
+            android:id="@+id/movie_time"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="상영 시간: "
+            android:textSize="20sp"
+            android:textColor="#FFEB3B"
+            android:fontFamily="@font/ssangmoondong"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

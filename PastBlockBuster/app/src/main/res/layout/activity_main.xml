@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#162855"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/logo"
+        android:src="@drawable/blockbuster"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/et_yy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1995"
+            android:inputType="date"
+            android:textColor="#cccccc"
+            android:fontFamily="@font/ssangmoondong"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="년"
+            android:textColor="#cccccc"
+            android:fontFamily="@font/ssangmoondong"/>
+
+        <EditText
+            android:id="@+id/et_mm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="6"
+            android:inputType="date"
+            android:textColor="#cccccc"
+            android:fontFamily="@font/ssangmoondong"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="월"
+            android:textColor="#cccccc"
+            android:fontFamily="@font/ssangmoondong"/>
+
+
+
+        <EditText
+            android:id="@+id/et_dd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="2"
+            android:inputType="date"
+            android:textColor="#cccccc"
+            android:fontFamily="@font/ssangmoondong"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="일"
+            android:textColor="#cccccc"
+            android:fontFamily="@font/ssangmoondong"/>
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/circle"
+            android:text="검색"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/ssangmoondong"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/movie_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearlayout"
+        android:layout_margin="8dp"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/movie_list"
+        android:layout_alignRight="@+id/movie_list"
+        android:layout_alignLeft="@+id/movie_list"
+        android:layout_alignTop="@+id/movie_list">
+        <ProgressBar
+            android:id="@+id/movie_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

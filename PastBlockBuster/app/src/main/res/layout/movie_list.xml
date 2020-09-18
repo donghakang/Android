@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#162855">
+
+    <TextView
+        android:id="@+id/tv_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:text="1"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:textColor="#FFEB3B"
+        android:fontFamily="@font/ssangmoondong"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_rank"
+        android:layout_toLeftOf="@id/linear_layout_list"
+        android:layout_marginLeft="8dp"
+        android:text="더 렌탈: 소리없는 감시"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:textColor="#ffffff"
+        android:fontFamily="@font/ssangmoondong"
+        android:textSize="26sp"/>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_releasedate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="개봉일: 1995-06-02"
+            android:fontFamily="@font/ssangmoondong"
+            android:textColor="#C6C6C6"/>
+        <TextView
+            android:id="@+id/tv_audience"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="관객수: 1995-06-02"
+            android:fontFamily="@font/ssangmoondong"
+            android:textColor="#C6C6C6"/>
+        <TextView
+            android:id="@+id/tv_cumulative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="누적관객: 1995-06-02"
+            android:fontFamily="@font/ssangmoondong"
+            android:textColor="#E1A86A"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
