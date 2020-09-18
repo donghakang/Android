@@ -2,6 +2,7 @@ package com.example.pastblockbuster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,12 +28,15 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
+
     EditText etYY, etMM, etDD;
     Button btnSearch;
     ProgressBar loading;
 
     ListView movieList;
     MovieAdapter adapter;
+
+    String y, m, d;
 
     private static ArrayList<Movie> movieData = new ArrayList<>();
 
@@ -45,9 +49,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etMM = findViewById(R.id.et_mm);
         etDD = findViewById(R.id.et_dd);
 
-        etYY.setText("2020");
-        etMM.setText("9");
-        etDD.setText("17");
+        y = "2020";
+        m = "9";
+        d = "17";
+
+        etYY.setText(y);
+        etMM.setText(m);
+        etDD.setText(d);
 
         btnSearch = findViewById(R.id.btn_search);
         loading = findViewById(R.id.movie_progress);
@@ -57,9 +65,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         requestData("2020", "9", "17");
         setupMoiveList();
-
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        requestData(y, m, d);
+        setupMoiveList();
+    }
 
     // BUTTON CALL
     @Override
@@ -97,11 +110,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onResponse(String response) {
             // 통신을 성공 할 시
-            //progressBar.setVisibility(View.INVISIBLE);
-            Log.d("CHECKXX", response);
             readData(response);
             loading.setVisibility(View.INVISIBLE);
-
         }
     };
 
@@ -154,6 +164,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // Intent call.
+        Intent intent = new Intent(this, com.example.pastblockbuster.MovieActivity.class);
+        Movie selectMovie = movieData.get(position);
+        intent.putExtra("movieCode", selectMovie.movieId);
+        startActivity(intent);
     }
 
 
