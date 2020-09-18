@@ -32,25 +32,13 @@ public class VocabList extends ArrayAdapter<String> {
     private final ArrayList<Integer> level;
 
 
-    public VocabList(Activity context, ArrayList<String> arr ) {
-        super(context, R.layout.vocab_list, arr);
+    public VocabList(Activity context, ArrayList<String> eng, ArrayList<String> kor, ArrayList<Integer> level ) {
+        super(context, R.layout.vocab_list, eng);
         this.context = context;
 
-        this.eng = new ArrayList<>();
-        this.kor = new ArrayList<>();
-        this.level = new ArrayList<>();
-        for (int i = 0; i < JSON.vocab.length(); i ++) {
-            Log.d("HOW MANY VOCAB", i +"");
-            try {
-                JSONObject tmp = JSON.vocab.getJSONObject(i);
-                eng.add(tmp.getString("vocabEng"));
-                kor.add(tmp.getString("vocabKor"));
-                level.add(tmp.getInt("vocabLevel"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
+        this.eng = eng;
+        this.kor = kor;
+        this.level = level;
     }
 
     @Override
@@ -72,52 +60,54 @@ public class VocabList extends ArrayAdapter<String> {
         tvKor.setText(kor.get(position));
 
         int lv = level.get(position);
+
         switch (lv) {
             case 0:
-                lv1.setImageResource(R.drawable.circle_x_level);
-                lv2.setImageResource(R.drawable.circle_x_level);
-                lv3.setImageResource(R.drawable.circle_x_level);
-                lv4.setImageResource(R.drawable.circle_x_level);
-                lv5.setImageResource(R.drawable.circle_x_level);
+                lv1.setBackgroundResource(R.drawable.circle_x_level);
+                lv2.setBackgroundResource(R.drawable.circle_x_level);
+                lv3.setBackgroundResource(R.drawable.circle_x_level);
+                lv4.setBackgroundResource(R.drawable.circle_x_level);
+                lv5.setBackgroundResource(R.drawable.circle_x_level);
                 break;
             case 1:
-                lv1.setImageResource(R.drawable.circle_level);
-                lv2.setImageResource(R.drawable.circle_x_level);
-                lv3.setImageResource(R.drawable.circle_x_level);
-                lv4.setImageResource(R.drawable.circle_x_level);
-                lv5.setImageResource(R.drawable.circle_x_level);
+                lv1.setBackgroundResource(R.drawable.circle_level);
+                lv2.setBackgroundResource(R.drawable.circle_x_level);
+                lv3.setBackgroundResource(R.drawable.circle_x_level);
+                lv4.setBackgroundResource(R.drawable.circle_x_level);
+                lv5.setBackgroundResource(R.drawable.circle_x_level);
                 break;
             case 2:
-                lv1.setImageResource(R.drawable.circle_level);
-                lv2.setImageResource(R.drawable.circle_level);
-                lv3.setImageResource(R.drawable.circle_x_level);
-                lv4.setImageResource(R.drawable.circle_x_level);
-                lv5.setImageResource(R.drawable.circle_x_level);
+                lv1.setBackgroundResource(R.drawable.circle_level);
+                lv2.setBackgroundResource(R.drawable.circle_level);
+                lv3.setBackgroundResource(R.drawable.circle_x_level);
+                lv4.setBackgroundResource(R.drawable.circle_x_level);
+                lv5.setBackgroundResource(R.drawable.circle_x_level);
                 break;
             case 3:
-                lv1.setImageResource(R.drawable.circle_level);
-                lv2.setImageResource(R.drawable.circle_level);
-                lv3.setImageResource(R.drawable.circle_level);
-                lv4.setImageResource(R.drawable.circle_x_level);
-                lv5.setImageResource(R.drawable.circle_x_level);
+                lv1.setBackgroundResource(R.drawable.circle_level);
+                lv2.setBackgroundResource(R.drawable.circle_level);
+                lv3.setBackgroundResource(R.drawable.circle_level);
+                lv4.setBackgroundResource(R.drawable.circle_x_level);
+                lv5.setBackgroundResource(R.drawable.circle_x_level);
                 break;
             case 4:
-                lv1.setImageResource(R.drawable.circle_level);
-                lv2.setImageResource(R.drawable.circle_level);
-                lv3.setImageResource(R.drawable.circle_level);
-                lv4.setImageResource(R.drawable.circle_level);
-                lv5.setImageResource(R.drawable.circle_x_level);
+                lv1.setBackgroundResource(R.drawable.circle_level);
+                lv2.setBackgroundResource(R.drawable.circle_level);
+                lv3.setBackgroundResource(R.drawable.circle_level);
+                lv4.setBackgroundResource(R.drawable.circle_level);
+                lv5.setBackgroundResource(R.drawable.circle_x_level);
                 break;
             case 5:
-                lv1.setImageResource(R.drawable.circle_level);
-                lv2.setImageResource(R.drawable.circle_level);
-                lv3.setImageResource(R.drawable.circle_level);
-                lv4.setImageResource(R.drawable.circle_level);
-                lv5.setImageResource(R.drawable.circle_level);
+                lv1.setBackgroundResource(R.drawable.circle_level);
+                lv2.setBackgroundResource(R.drawable.circle_level);
+                lv3.setBackgroundResource(R.drawable.circle_level);
+                lv4.setBackgroundResource(R.drawable.circle_level);
+                lv5.setBackgroundResource(R.drawable.circle_level);
                 break;
             default:
                 break;
         }
+
 
         return rowView;
     }
