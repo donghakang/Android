@@ -16,6 +16,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MovieActivity extends AppCompatActivity {
 
     TextView movieName;
@@ -28,6 +32,8 @@ public class MovieActivity extends AppCompatActivity {
     ProgressBar loading;
 
     String movieCode;
+    String movieAud;
+    String movieAudCum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +50,18 @@ public class MovieActivity extends AppCompatActivity {
 
         loadStart();
         movieCode = getIntent().getStringExtra("movieCode");
+        movieAud = getIntent().getStringExtra("movieAud");
+        movieAudCum = getIntent().getStringExtra("movieAudCum");
 
         requestData();
 
         loadEnd();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
     }
 
     // MARK: Request Data
@@ -69,7 +83,38 @@ public class MovieActivity extends AppCompatActivity {
         @Override
         public void onResponse(String response) {
             // 통신을 성공 할 시
-            Log.d("RESP", response);
+            try {
+                JSONObject data = new JSONObject(response);
+                JSONObject movieInfoResult = data.optJSONObject("movieInfoResult");
+                JSONObject movieInfo = movieInfoResult.optJSONObject("movieInfo");
+                movieName.setText(movieInfo.optString("movieNm"));
+                audience.setText(movieAud);
+                cumulativeAudience.setText(movieAudCum);
+
+                JSONArray directors = movieInfo.optJSONArray("directors");
+                String directorList = "";
+                for (int i = 0; i < directors.length(); i ++ ) {
+                    JSONObject dir = directors.getJSONObject(i);
+                    directorList += dir.optString("peopleNm") + "  ";
+                }
+                director.setText("영화 감독: " + directorList);
+
+                JSONArray actors = movieInfo.optJSONArray("actors");
+                String actorList = "";
+                for (int i = 0; i < actors.length(); i ++) {
+                    JSONObject act = actors.getJSONObject(i);
+                    actorList += act.optString("peopleNm") + "  ";
+                }
+
+                actor.setText(actorList);
+                movieTime.setText(movieInfo.optString("showTm"));
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
         }
     };
 

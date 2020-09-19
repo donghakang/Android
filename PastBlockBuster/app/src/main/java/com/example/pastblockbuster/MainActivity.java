@@ -62,9 +62,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         movieList = findViewById(R.id.movie_list);
 
         btnSearch.setOnClickListener(this);
-
-        requestData("2020", "9", "17");
-        setupMoiveList();
     }
 
     @Override
@@ -141,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                String showRange = rankedMovie.getString("showRange");
                 String movieCd = rankedMovie.getString("movieCd");
                 movieData.add(new Movie(movieNm, openDt, audiAcc, audiCnt, movieCd));
+                adapter.notifyDataSetChanged();
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -167,6 +165,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(this, com.example.pastblockbuster.MovieActivity.class);
         Movie selectMovie = movieData.get(position);
         intent.putExtra("movieCode", selectMovie.movieId);
+        intent.putExtra("movieAud", selectMovie.getAud());
+        intent.putExtra("movieAudCum", selectMovie.getAudCum());
         startActivity(intent);
     }
 

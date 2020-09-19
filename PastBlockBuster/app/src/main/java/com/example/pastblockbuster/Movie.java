@@ -10,6 +10,14 @@ public class Movie {
     String time;
     String movieId;
 
+    public String getAud() {
+        return aud;
+    }
+
+    public String getAudCum() {
+        return aud_cum;
+    }
+
     public Movie(String name, String date, String aud_cum, String aud, String movieId) {
         this.name = name;
         this.date = date;
