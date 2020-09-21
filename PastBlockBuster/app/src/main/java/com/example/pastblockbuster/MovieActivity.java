@@ -49,12 +49,11 @@ public class MovieActivity extends AppCompatActivity {
         movieTime = findViewById(R.id.movie_time);
 
         loadStart();
+
         movieCode = getIntent().getStringExtra("movieCode");
         movieAud = getIntent().getStringExtra("movieAud");
         movieAudCum = getIntent().getStringExtra("movieAudCum");
-
         requestData();
-
         loadEnd();
     }
 
@@ -88,8 +87,8 @@ public class MovieActivity extends AppCompatActivity {
                 JSONObject movieInfoResult = data.optJSONObject("movieInfoResult");
                 JSONObject movieInfo = movieInfoResult.optJSONObject("movieInfo");
                 movieName.setText(movieInfo.optString("movieNm"));
-                audience.setText(movieAud);
-                cumulativeAudience.setText(movieAudCum);
+                audience.setText("당일 관객 수: " + movieAud + " 명");
+                cumulativeAudience.setText("누적 관객 수: " + movieAudCum + " 명");
 
                 JSONArray directors = movieInfo.optJSONArray("directors");
                 String directorList = "";
@@ -107,7 +106,7 @@ public class MovieActivity extends AppCompatActivity {
                 }
 
                 actor.setText(actorList);
-                movieTime.setText(movieInfo.optString("showTm"));
+                movieTime.setText("상영 시간: " + movieInfo.optString("showTm") + " 시간");
 
 
             } catch (JSONException e) {
@@ -133,6 +132,7 @@ public class MovieActivity extends AppCompatActivity {
 
     // MARK: Loading handler
     private void loadStart() {
+
         Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show();
         loading.setVisibility(View.VISIBLE);
 

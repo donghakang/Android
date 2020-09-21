@@ -135,7 +135,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String audiAcc = rankedMovie.getString("audiAcc");
                 String audiCnt = rankedMovie.getString("audiCnt");
                 String openDt = rankedMovie.getString("openDt");
-//                String showRange = rankedMovie.getString("showRange");
                 String movieCd = rankedMovie.getString("movieCd");
                 movieData.add(new Movie(movieNm, openDt, audiAcc, audiCnt, movieCd));
                 adapter.notifyDataSetChanged();

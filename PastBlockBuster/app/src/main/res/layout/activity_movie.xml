@@ -87,20 +87,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="송강호 "
+            android:text=""
             android:textSize="20sp"
             android:textColor="#FFEB3B"
             android:fontFamily="@font/ssangmoondong"/>
 
 
-        <TextView
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:text="상영 시간: "
-            android:textSize="20sp"
-            android:textColor="#FFFFFF"
-            android:fontFamily="@font/ssangmoondong"/>
         <TextView
             android:id="@+id/movie_time"
             android:layout_width="match_parent"
@@ -109,7 +101,7 @@
             android:layout_weight="4"
             android:text="상영 시간: "
             android:textSize="20sp"
-            android:textColor="#FFEB3B"
+            android:textColor="#ffffff"
             android:fontFamily="@font/ssangmoondong"/>
 
 
