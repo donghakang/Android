@@ -27,13 +27,13 @@
 
         <EditText
             android:id="@+id/et_yy"
-            android:layout_width="wrap_content"
+            android:layout_width="72dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="1995"
+            android:fontFamily="@font/ssangmoondong"
             android:inputType="date"
-            android:textColor="#cccccc"
-            android:fontFamily="@font/ssangmoondong"/>
+            android:text="1995"
+            android:textColor="#cccccc" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,15 +44,15 @@
 
         <EditText
             android:id="@+id/et_mm"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="6"
+            android:fontFamily="@font/ssangmoondong"
             android:inputType="date"
-            android:textColor="#cccccc"
-            android:fontFamily="@font/ssangmoondong"/>
+            android:text="6"
+            android:textColor="#cccccc" />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="월"

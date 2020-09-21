@@ -6,6 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp">
+        <EditText
+            android:id="@+id/et_episode"
+            android:layout_width="wrap_content"
+            android:layout_weight="5"
+            android:layout_marginRight="20dp"
+            android:inputType="number"
+            android:layout_height="wrap_content" />
+
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/et_episode"
+            android:text="search" />
+    </LinearLayout>
+
     <WebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"

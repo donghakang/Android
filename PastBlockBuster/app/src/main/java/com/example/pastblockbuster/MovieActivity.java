@@ -28,6 +28,7 @@ public class MovieActivity extends AppCompatActivity {
     TextView director;
     TextView actor;
     TextView movieTime;
+    TextView movieGenre;
 
     ProgressBar loading;
 
@@ -47,7 +48,7 @@ public class MovieActivity extends AppCompatActivity {
         director = findViewById(R.id.director);
         actor = findViewById(R.id.movie_actor);
         movieTime = findViewById(R.id.movie_time);
-
+        movieGenre = findViewById(R.id.movie_genre);
         loadStart();
 
         movieCode = getIntent().getStringExtra("movieCode");
@@ -86,9 +87,20 @@ public class MovieActivity extends AppCompatActivity {
                 JSONObject data = new JSONObject(response);
                 JSONObject movieInfoResult = data.optJSONObject("movieInfoResult");
                 JSONObject movieInfo = movieInfoResult.optJSONObject("movieInfo");
+
+                Log.d("INFO", movieInfo.toString());
                 movieName.setText(movieInfo.optString("movieNm"));
                 audience.setText("당일 관객 수: " + movieAud + " 명");
                 cumulativeAudience.setText("누적 관객 수: " + movieAudCum + " 명");
+
+                JSONArray movieGenres = movieInfo.optJSONArray("genres");
+                String genreList = "";
+                for (int i = 0; i < movieGenres.length(); i ++ ) {
+                    JSONObject genreNm = movieGenres.getJSONObject(i);
+                    genreList += genreNm.optString("genreNm") + "  ";
+                }
+                movieGenre.setText("영화 장르: " + genreList);
+
 
                 JSONArray directors = movieInfo.optJSONArray("directors");
                 String directorList = "";
