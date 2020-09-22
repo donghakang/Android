@@ -7,15 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49ff7384-353f-451d-bcb0-3a2bc971f0fa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Intent/app/src/main/java/com/example/intent/activity/GameActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Intent/app/src/main/java/com/example/intent/activity/GameActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Intent/app/src/main/res/layout/activity_game.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Intent/app/src/main/res/layout/activity_game.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../VocabExtended2/app/src/main/res/layout/add_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PastBlockBuster/app/src/main/java/com/example/pastblockbuster/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PastBlockBuster/app/src/main/java/com/example/pastblockbuster/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_27" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -50,6 +50,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.-1646900237">

@@ -1,5 +1,6 @@
 package com.example.pastblockbuster;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -171,7 +172,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == 10) {
+            // 자동로그인 시도
+        } else {
+
+        }
+
+    }
 
     private String datePrint(String yy, String mm, String dd) {
         int m = Integer.parseInt(mm);
