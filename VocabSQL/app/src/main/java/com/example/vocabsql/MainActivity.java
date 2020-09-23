@@ -301,6 +301,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (!radioEng.isChecked()) {
+            isKor = false;
+        } else {
+            isKor = true;
+        }
         updateQuestion();
     }
+
+/**  //  더 쉽게 만들기위해 모든 메소드 뒤에 dbSet을 불러주고, 다 지우고 다시 다 넣는 형식으로 진행이된다.
+ *   // 이렇게 해도 무방한 이유는 SQLite는 생각보다 빠르기 때문이다.
+ *   
+    private void dbSet() {
+        SQLiteDatabase db = openOrCreateDatabase("my.db", Context.MODE_PRIVATE, null);
+        String sql = "DELETE FROM voca";
+        db.execSQL(sql);
+
+        for (int i = 0; i < Storage.vocaArr.size(); i ++) {
+            String eng = Storage.vocaArr.get(i).eng;
+            String kor = Storage.vocaArr.get(i).kor;
+            sql = "INSERT INTO voca (eng, kor) VALUES ('" + eng + "', '" + kor + "')";
+            db.execSQL(sql);
+        }
+
+        db.close();
+    }
+ **/
 }
