@@ -23,12 +23,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:text="English"
                 android:layout_weight="1"/>
             <EditText
                 android:id="@+id/et_kor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:text="한국어"
                 android:layout_weight="1"/>
 
         </LinearLayout>

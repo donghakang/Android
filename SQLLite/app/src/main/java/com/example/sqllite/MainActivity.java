@@ -49,6 +49,16 @@ public class MainActivity extends AppCompatActivity {
         }
         c.close();
 
+
+        /** 삭제 **/
+        String sql = "DELETE FROM member";          // 모든 데이터를 다 삭제한다.
+        String sql_1 = sql + " WHERE idx=6";        // idx 6을 삭제한다.
+        db.execSQL(sql);
+
+        /** 수정 **/
+        String fix_sql = "UPDATE member SET name='동하' WHERE idx=2");
+        db.execSQL(fix_sql);
+
         db.close();
     }
 }

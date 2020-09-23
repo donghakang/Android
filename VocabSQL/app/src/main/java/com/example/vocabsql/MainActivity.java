@@ -88,11 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loadVocabSQL();
         isKor = false;
 
-
-        if (kor.size() > 1) {
-            radioEng.setChecked(true);
-            updateQuestion();
-        }
+        updateQuestion();
 
     }
 
@@ -163,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void loadVocabSQL() {
-
         Cursor c = db.rawQuery("SELECT * FROM vocab", null);
         c.moveToFirst();
         while (c.isAfterLast() == false) {
@@ -173,7 +168,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             eng.add(engVocab);
             kor.add(korVocab);
             c.moveToNext();
-
         }
         c.close();
     }
@@ -182,24 +176,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void updateQuestion() {
-        vocabCount = kor.size();
 
-        int pos = new Random().nextInt(vocabCount) + 1;
-        Cursor c = db.rawQuery("SELECT * FROM vocab" + " WHERE _idx="+pos, null);
-        c.moveToFirst();
-        Log.d(c.getString(1), c.getString(2));
+        if (kor.size() > 0) {
+            vocabCount = kor.size();
+            int pos = new Random().nextInt(vocabCount) + 1;
+            Log.d("XXXX", pos + "");
+            String sql = "SELECT * FROM vocab" + " WHERE _idx="+pos;
+            Cursor c = db.rawQuery(sql, null);
+            c.moveToFirst();
+            Log.d("PRINT MORE", c.getString(0) + "   " +  c.getString(1) + "    " + c.getString(2));
+            if (isKor) {
+                tvQuestion.setText(c.getString(2));
+                currentAnswer = c.getString(1);
+            } else {
+                tvQuestion.setText(c.getString(1));
+                currentAnswer = c.getString(2);
+            }
 
-        etAnswer.setText("");
-        isKor = radioKor.isChecked();
-        if (isKor) {
-            tvQuestion.setText(kor.get(pos));
-            currentAnswer = eng.get(pos);
+            c.close();
         } else {
-            tvQuestion.setText(eng.get(pos));
-            currentAnswer = kor.get(pos);
+            tvQuestion.setText("");
+            etAnswer.setText("");
         }
-
-        c.close();
+//        vocabCount = kor.size();
+//
+//        int pos = new Random().nextInt(vocabCount) + 1;
+//        Cursor c = db.rawQuery("SELECT * FROM vocab" + " WHERE _idx="+pos, null);
+//        c.moveToFirst();
+//        Log.d(c.getString(1), c.getString(2));
+//
+//        etAnswer.setText("");
+//        isKor = radioKor.isChecked();
+//        if (isKor) {
+//            tvQuestion.setText(kor.get(pos));
+//            currentAnswer = eng.get(pos);
+//        } else {
+//            tvQuestion.setText(eng.get(pos));
+//            currentAnswer = kor.get(pos);
+//        }
+//
+//        c.close();
     }
 
 
@@ -285,9 +301,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-        if (kor.size() > 0) {
-            updateQuestion();
-        }
+        updateQuestion();
     }
 }
