@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void saveData() {
+    protected void saveData() {
         // 저장하기
         SharedPreferences pref = getSharedPreferences("mode", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
@@ -246,6 +247,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 answerQuestion();
                 break;
             case R.id.btn_detail:
+                Intent intent = new Intent(this, AddActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn_pop:
                 showDialog();
