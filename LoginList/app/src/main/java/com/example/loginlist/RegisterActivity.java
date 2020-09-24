@@ -1,4 +1,4 @@
-package com.example.dashboard;
+package com.example.loginlist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,9 +25,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnCheckId, btnRegister, btnNext;
+
+    Button btnCheckId, btnRegister;
     EditText etId, etPw;
 
     boolean registable = false;
@@ -37,19 +38,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
+
+        registable = false;
 
         btnCheckId = findViewById(R.id.btn_checkid);
         btnRegister = findViewById(R.id.btn_register);
-        btnNext = findViewById(R.id.btn_next);
 
         etId = findViewById(R.id.et_id);
         etPw = findViewById(R.id.et_pw);
 
+
         btnCheckId.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
-        btnNext.setOnClickListener(this);
-
     }
 
     @Override
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_checkid:
                 id = etId.getText().toString();
                 if (id.equals("")) {
-                    Toast.makeText(this, "Insert Id", Toast.LENGTH_SHORT);
+                    Toast.makeText(this, "아이디를 입력하세요.", Toast.LENGTH_SHORT);
                 } else {
                     requestIdCheck(id);
                 }
@@ -66,19 +67,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_register:
                 String pw = etPw.getText().toString();
                 if (pw.equals("")) {
-                    Toast.makeText(this, "Insert Pw", Toast.LENGTH_SHORT);
+                    Toast.makeText(this, "암호를 입력하세요.", Toast.LENGTH_SHORT);
                 } else {
-                    request(pw);
+                    if (registable) {
+                        request(pw);
+                    } else {
+                        Toast.makeText(this, "아이디 중복확인하세요.", Toast.LENGTH_SHORT);
+                    }
+
                 }
-                break;
-            case R.id.btn_next:
-//                String name = "";
-//                if (isLogin) {
-//                    name = etId.getText().toString();
-//                }
-                Intent intent = new Intent(this, com.example.dashboard.SubActivity.class);
-                intent.putExtra("name", "황제성");
-                startActivity(intent);
                 break;
         }
     }
@@ -115,10 +112,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 JSONObject j = new JSONObject(response);
                 if (j.optString("result").equals("OK")) {
                     isLogin = true;
-                    Toast.makeText(MainActivity.this, "회원가입이 완료 되었습니다..", Toast.LENGTH_SHORT).show();
-                    Log.d("adadadad", j.optString("token"));
+                    Toast.makeText(RegisterActivity.this, "회원가입이 완료 되었습니다..", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegisterActivity.this, com.example.loginlist.MainActivity.class);
+                    startActivity(intent);
+                    finish();
+
                 } else {
-                    Toast.makeText(MainActivity.this, "회원가입 할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "회원가입 할 수 없습니다.", Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onErrorResponse(VolleyError error) {
             // 통신을 실패할 시
-            Toast.makeText(MainActivity.this, "통신이 불가능 합니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "통신이 불가능 합니다.", Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -167,9 +167,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d("dddddd", j.optString("result"));
                 if (j.optString("result").equals("OK")) {
                     registable = true;
-                    Toast.makeText(MainActivity.this, "사용 가능한 아이디 입니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "사용 가능한 아이디 입니다.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MainActivity.this, "이미 가입 입니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "이미 가입 입니다.", Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -182,8 +182,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onErrorResponse(VolleyError error) {
             // 통신을 실패할 시
-            Toast.makeText(MainActivity.this, "통신이 불가능 합니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "통신이 불가능 합니다.", Toast.LENGTH_SHORT).show();
         }
     };
+
+
+
+
+
 
 }

@@ -71,16 +71,4 @@
         android:textSize="28sp"
         android:layout_below="@id/layout_id"/>
 
-    <Button
-        android:id="@+id/btn_next"
-        android:layout_below="@id/btn_register"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_alignLeft="@id/btn_register"
-        android:layout_alignRight="@id/btn_register"
-        android:text="다음"
-        android:textSize="28sp"/>
-
 </RelativeLayout>
