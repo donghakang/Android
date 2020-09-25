@@ -2,21 +2,25 @@ package com.example.loginlist.Dashboard;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.loginlist.R;
 
 import java.util.ArrayList;
 
-public class DashboardAdapter extends ArrayAdapter {
-    LayoutInflater inflater;
-    ArrayList<Dashboard> arr;
+public class ReplyAdapter extends ArrayAdapter {
 
-    public DashboardAdapter (Activity context, ArrayList<Dashboard> arr) {
+    LayoutInflater inflater;
+    ArrayList<Reply> arr;
+
+    public ReplyAdapter (Activity context, ArrayList<Reply> arr) {
         super(context, R.layout.dashboard_list, arr);
         this.arr = arr;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -41,34 +45,30 @@ public class DashboardAdapter extends ArrayAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        ItemHolder viewHolder;
+        ReplyAdapter.ReplyItemHolder viewHolder;
         if(convertView == null) {
 
-            convertView = inflater.inflate(R.layout.dashboard_list, parent, false);
-            viewHolder = new ItemHolder();
+            convertView = inflater.inflate(R.layout.response_list, parent, false);
+            viewHolder = new ReplyItemHolder();
 
-            viewHolder.tvIdx = convertView.findViewById(R.id.tv_idx);
-            viewHolder.tvDashTitle = convertView.findViewById(R.id.tv_dash_title);
-            viewHolder.tvDate = convertView.findViewById(R.id.tv_date);
-            viewHolder.tvCountReply = convertView.findViewById(R.id.tv_count_reply);
+            viewHolder.tvWriter = convertView.findViewById(R.id.tv_replier);
+            viewHolder.tvContent = convertView.findViewById(R.id.tv_reply);
+//            viewHolder.tvDate = convertView.findViewById(R.id.tv_date);
 
             convertView.setTag(viewHolder);
         }else{
-            viewHolder = (ItemHolder) convertView.getTag();
+            viewHolder = (ReplyAdapter.ReplyItemHolder) convertView.getTag();
         }
 
-        viewHolder.tvIdx.setText(arr.get(position).idx + "");
-        viewHolder.tvDashTitle.setText(arr.get(position).title);
-        viewHolder.tvDate.setText(arr.get(position).wdate);
-        viewHolder.tvCountReply.setText(arr.get(position).count_reply);
+        viewHolder.tvWriter.setText(arr.get(position).writer);
+        viewHolder.tvContent.setText(arr.get(position).content);
 
         return convertView;
     }
 
-    class ItemHolder {
-        TextView tvIdx;
-        TextView tvDashTitle;
-        TextView tvDate;
-        TextView tvCountReply;
+    class ReplyItemHolder {
+        TextView tvWriter;
+        TextView tvContent;
+//        TextView tvDate;
     }
 }

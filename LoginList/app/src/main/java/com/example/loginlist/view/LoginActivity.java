@@ -1,11 +1,9 @@
-package com.example.loginlist;
+package com.example.loginlist.view;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,6 +17,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.loginlist.R;
+import com.example.loginlist.control.PersonalInfo;
+import com.example.loginlist.view.DashboardActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +32,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText etLoginId, etPassword;
     TextView tvLogin;
 
+    String writer, token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         String id = etLoginId.getText().toString();
         String pw = etPassword.getText().toString();
+        writer = id;
         if (id.equals("")) {
             Toast.makeText(LoginActivity.this, "아이디를 입력하세요", Toast.LENGTH_SHORT).show();
         } else if (pw.equals("")) {
@@ -87,8 +90,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 JSONObject j = new JSONObject(response);
                 if (j.optString("result").equals("OK")) {
                     // 로그인 성공
-                    String token = j.optString("token");
-                    Intent intent = new Intent(LoginActivity.this, com.example.loginlist.DashboardActivity.class);
+                    token = j.optString("token");
+                    PersonalInfo.setToken(token);
+                    PersonalInfo.setWriter(writer);
+                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                     intent.putExtra("token", token);
                     startActivity(intent);
                     finish();

@@ -1,4 +1,4 @@
-package com.example.loginlist;
+package com.example.loginlist.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.loginlist.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -28,11 +30,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (v.getId()) {
             case R.id.tv_login:
-                intent = new Intent(this, com.example.loginlist.LoginActivity.class);
+                intent = new Intent(this, com.example.loginlist.view.LoginActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_register:
-                intent = new Intent(this, com.example.loginlist.RegisterActivity.class);
+                intent = new Intent(this, com.example.loginlist.view.RegisterActivity.class);
                 startActivity(intent);
                 break;
         }

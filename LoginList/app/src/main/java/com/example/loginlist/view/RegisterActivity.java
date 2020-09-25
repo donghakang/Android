@@ -1,4 +1,4 @@
-package com.example.loginlist;
+package com.example.loginlist.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.loginlist.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -113,7 +114,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if (j.optString("result").equals("OK")) {
                     isLogin = true;
                     Toast.makeText(RegisterActivity.this, "회원가입이 완료 되었습니다..", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RegisterActivity.this, com.example.loginlist.MainActivity.class);
+                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
 
