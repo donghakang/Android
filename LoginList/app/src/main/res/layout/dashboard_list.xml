@@ -19,13 +19,14 @@
         android:layout_toRightOf="@id/tv_idx"
         android:layout_marginLeft="8dp"
         android:text="더 렌탈: 소리없는 감시"
-        android:layout_toLeftOf="@+id/tv_date"
+        android:layout_toLeftOf="@+id/layout___"
         android:gravity="left"
         android:layout_centerVertical="true"
         android:textSize="26sp"/>
 
 
     <LinearLayout
+        android:id="@+id/layout___"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
