@@ -95,11 +95,11 @@ public class OpenActivity extends AppCompatActivity implements View.OnClickListe
             reply();
             etResponse.setText("");
         }
-
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
         editReply(position);
     }
 
@@ -259,6 +259,7 @@ public class OpenActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+
     /// - Delete Reply
     private void deleteReply(final int position) {
         final Reply rep = arr.get(position);
@@ -283,7 +284,6 @@ public class OpenActivity extends AppCompatActivity implements View.OnClickListe
             builder.create().show();
         }
     }
-
 
     private void deleteItem(final int position) {
         RequestQueue stringRequest = Volley.newRequestQueue(this);

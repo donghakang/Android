@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
     Button btnCheckId, btnRegister;
-    EditText etId, etPw;
+    EditText etId, etPw, etPw2;
 
     boolean registable = false;
     boolean isLogin = false;
@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         etId = findViewById(R.id.et_id);
         etPw = findViewById(R.id.et_pw);
-
+        etPw2 = findViewById(R.id.et_pw_2);
 
         btnCheckId.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
@@ -67,8 +67,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btn_register:
                 String pw = etPw.getText().toString();
+                String pw2 = etPw2.getText().toString();
                 if (pw.equals("")) {
                     Toast.makeText(this, "암호를 입력하세요.", Toast.LENGTH_SHORT);
+                } else if (!pw.equals(pw2)) {
+                    Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT);
                 } else {
                     if (registable) {
                         request(pw);

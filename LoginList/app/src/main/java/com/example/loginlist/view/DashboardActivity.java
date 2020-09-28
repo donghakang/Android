@@ -106,7 +106,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 if (j.optString("result").equals("OK")) {
                     // 리스트를 가져옵니다.
                     JSONArray dashList = new JSONArray(j.optString("list"));
-                    Log.d("dddddddd", dashList.toString());
+
                     idxCount = dashList.length();
 
                     for (int i = 0; i < dashList.length(); i ++) {

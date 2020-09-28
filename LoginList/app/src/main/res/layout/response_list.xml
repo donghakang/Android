@@ -20,5 +20,29 @@
         android:textSize="20sp"
         android:layout_below="@id/tv_replier"/>
 
+    <LinearLayout
+        android:layout_below="@id/tv_reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/btn_edit"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:background="#fbfbfb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:textSize="12sp"/>
+        <ImageButton
+            android:id="@+id/btn_delete"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:background="#fbfbfb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+
 
 </RelativeLayout>
