@@ -63,7 +63,7 @@ protected void onCreate(Bundle savedInstanceState) {
 ## Media Controller
 Default media player, does not use this because of design.
 미디어 플레이어 디폴트 뷰 이지만, 디자인 문제로 웬만하면 사용하지 않는다.
-![Media Controller](./img/mediacontroller.jpg)
+![Media Controller](img/mediacontroller.jpg)
 
 ```JAVA
 MediaController controller = new MediaController(this);
