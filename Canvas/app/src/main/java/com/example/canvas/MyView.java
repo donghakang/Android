@@ -14,6 +14,7 @@ public class MyView extends View {
 
     Paint p;
 
+    Ball b;
 
     int posX = 0;
     int posY = 0;
@@ -32,6 +33,7 @@ public class MyView extends View {
         super(context, attrs);
         Log.d("dddd", "생성자 2");
         p = new Paint();
+        b = new Ball()
         new MyThread().start();
     }
 
@@ -59,9 +61,9 @@ public class MyView extends View {
         } else {
             posX -= 5;
             if (isDown) {
-                posY += 5;
+                posY += 2;
             } else {
-                posY -= 5;
+                posY -= 2;
             }
         }
     }
