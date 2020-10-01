@@ -103,5 +103,5 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-<br><br><br><br><br>
+<br><br><br>
 [**Link to more permission**](https://s262701-id.tistory.com/96)
