@@ -40,6 +40,11 @@ builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
 builder.create().show();
 ```
 
+|type|description|
+|-|-|
+|```builder.setCancelable(false);```|if you want answer for sure, we use this. <br> if this is true, by clicking background (gray area) will unshow the alert builder|
+
+
 ## All together
 ```JAVA
     @Override
