@@ -146,6 +146,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 + "task  TEXT" + ");");
     }
 
+    private void setupTaskList(myDate currentDate) {
+        ArrayList<String> arr = new ArrayList<>();
+        arr.clear();
+
+        String condition = "year = " + currentDate.yy + " AND month = " + currentDate.mm + " AND date = " + currentDate.dd;
+        Cursor c = db.rawQuery("SELECT * FROM tasks WHERE (" + condition + ")", null);
+        c.moveToFirst();
+        while (c.isAfterLast() == false) {
+            arr.add(0, c.getString((5)));
+            c.moveToNext();
+        }
+        c.close();
+
+        taskAdapter = new TaskAdapter(this, arr, currentDate);
+        lvTask.setAdapter(taskAdapter);
+
+        taskAdapter.notifyDataSetChanged();
+    }
+
+    // ---
+
+
 
     TextView tvDate;
     EditText etText;
@@ -183,24 +205,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void setupTaskList(myDate currentDate) {
-        ArrayList<String> arr = new ArrayList<>();
-        arr.clear();
-
-        String condition = "year = " + currentDate.yy + " AND month = " + currentDate.mm + " AND date = " + currentDate.dd;
-        Cursor c = db.rawQuery("SELECT * FROM tasks WHERE (" + condition + ")", null);
-        c.moveToFirst();
-        while (c.isAfterLast() == false) {
-            arr.add(0, c.getString((5)));
-            c.moveToNext();
-        }
-        c.close();
-
-        taskAdapter = new TaskAdapter(this, arr, currentDate);
-        lvTask.setAdapter(taskAdapter);
-
-        taskAdapter.notifyDataSetChanged();
-    }
 
 
 
@@ -218,9 +222,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             showDial(currentDate);
         }
-
     }
-
 
     ///- Adapter
     class ItemHolder {
