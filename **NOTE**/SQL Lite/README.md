@@ -27,6 +27,14 @@ db.execSQL(data1);
 ```
 
 
+#### Delete
+```JAVA
+db.execSQL("DELETE FROM member WHERE name='하하' AND age=10 AND addr='Seoul'");
+
+String data1 = "DELETE FROM member WHERE name='하하' AND age=10 AND addr='Seoul'";
+db.execSQL(data1);
+```
+
 #### Search
 ```Java
 Cursor c = db.rawQuery("SELECT * FROM member", null);
@@ -53,3 +61,74 @@ db.close()
 ```
 because of the memory problem. It is necessary to close the db.
 
+---
+
+### SQL Helper
+```JAVA
+public class SqlHelper {
+    static Context con;
+
+    //db 테이블 초기화 작업
+    public static void init(Context context) {
+        con = context;
+        SQLiteDatabase db = con.openOrCreateDatabase("sqlist_test.db", Context.MODE_PRIVATE, null);
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS sch("
+                + "idx INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "content TEXT,"
+                + "year TEXT,"
+                + "month TEXT,"
+                + "day TEXT);");
+        db.close();
+    }
+
+    public static void getData(String year, String month, String day, ArrayList<DialItemData> dialItemArr){
+        SQLiteDatabase db = con.openOrCreateDatabase("sqlist_test.db", Context.MODE_PRIVATE, null);
+
+        Cursor c = db.rawQuery("SELECT * FROM sch WHERE year='"+year+"' AND month='"+month+"' AND day='"+day+"'", null);
+        c.moveToFirst();
+        while (c.isAfterLast() == false) {
+            dialItemArr.add(new DialItemData(c.getString(1)));
+            c.moveToNext();
+        }
+        c.close();
+
+        db.close();
+    }
+
+    public static void deleteData(String name, String[] field, String value[]) {
+//        String sql = "DELETE FROM sch WHERE year='"+year+"' AND month='"+month+"' AND day='"+day+"'";
+        SQLiteDatabase db = con.openOrCreateDatabase("sqlist_test.db", Context.MODE_PRIVATE, null);
+        String fieldStr = "";
+        for (int i = 0; i < field.length; i++) {
+            fieldStr +=" "+field[i]+"='"+value[i]+"' AND";
+        }
+        fieldStr = fieldStr.substring(0, fieldStr.length() - 4);
+
+        String sql = "DELETE FROM "+name+" WHERE "+fieldStr;
+        Log.d("aabb",sql);
+        db.execSQL(sql);
+        db.close();
+    }
+
+    public static void insertData(String name, String[] field, String value[]) {
+        SQLiteDatabase db = con.openOrCreateDatabase("sqlist_test.db", Context.MODE_PRIVATE, null);
+        String fieldStr = "";
+        for (String temp : field) {
+            fieldStr += temp + ",";
+        }
+        fieldStr = fieldStr.substring(0, fieldStr.length() - 1);
+
+        String valueStr = "";
+        for (String temp : value) {
+            valueStr += "'" + temp + "',";
+        }
+        valueStr = valueStr.substring(0, valueStr.length() - 1);
+
+        String sql = "INSERT INTO " + name + " (" + fieldStr + ") VALUES (" + valueStr + ")";
+        Log.d("aabb",sql);
+        db.execSQL(sql);
+        db.close();
+    }
+}
+```
