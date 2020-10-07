@@ -2,6 +2,7 @@ package com.example.todocalendar;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class TaskAdapter extends ArrayAdapter {
+public class TaskAdapter extends ArrayAdapter implements View.OnClickListener {
     LayoutInflater inflater;
     ArrayList<String> arr;
     myDate currentDate;
+
+    static Context con;
 
     // create separate class to set elements
     class TaskItemHolder {
@@ -64,15 +67,34 @@ public class TaskAdapter extends ArrayAdapter {
             viewHolder = (TaskItemHolder) convertView.getTag();
         }
 
-        viewHolder.task.setText(arr.get(position));
-        viewHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        // !!! important
+        viewHolder.btnDelete.setTag(position);
 
-            }
-        });
+        viewHolder.task.setText(arr.get(position));
+        viewHolder.btnDelete.setOnClickListener(this);
 
         return convertView;
+    }
+
+    @Override
+    public void onClick(View v) {
+        int position = Integer.parseInt(v.getTag() + "");
+        deleteWhere(position);
+        arr.remove(position);
+        notifyDataSetChanged();
+        // -- need to delete SQL data.
+
+    }
+
+
+    private void deleteWhere(int position) {
+        String data = "year=" + currentDate.yy + " AND " +
+                      "month=" + currentDate.mm + " AND " +
+                      "date=" + currentDate.dd + " AND " +
+                      "day='" + currentDate.day + "' AND " +
+                      "task='" + arr.get(position) + "'";
+        String exec = "DELETE FROM tasks WHERE " + data;
+        MainActivity.db.execSQL(exec);
     }
 }
 

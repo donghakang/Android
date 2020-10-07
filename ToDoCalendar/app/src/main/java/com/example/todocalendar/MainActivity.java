@@ -26,7 +26,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
-    SQLiteDatabase db;
+    public static SQLiteDatabase db;
 
     GridView gv;
     GridView gridDay;
@@ -158,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             c.moveToNext();
         }
         c.close();
+
 
         taskAdapter = new TaskAdapter(this, arr, currentDate);
         lvTask.setAdapter(taskAdapter);
