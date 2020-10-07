@@ -63,6 +63,46 @@ private void setupTaskList(myDate currentDate) {
 This can be substitude with ```SELECT task FROM tasks WHERE (year = _ AND month = _ AND date = _)```
 
 ### GetTag, SetTag
+```JAVA
+/// - MOST IMPORTANT
+public View getView(final int position, View convertView, ViewGroup parent) {
+    TaskAdapter.TaskItemHolder viewHolder;
+    if(convertView == null) {
+
+        convertView = inflater.inflate(R.layout.task_item, parent, false);
+        viewHolder = new TaskItemHolder();
+
+        // call the convertView's elements (previously defined in xml file)
+        viewHolder.task = convertView.findViewById(R.id.task);
+        viewHolder.btnDelete = convertView.findViewById(R.id.btn_delete);
+
+        convertView.setTag(viewHolder);
+    }else{
+        viewHolder = (TaskItemHolder) convertView.getTag();
+    }
+
+    // !!! important
+    viewHolder.btnDelete.setTag(position);
+
+    viewHolder.task.setText(arr.get(position));
+    viewHolder.btnDelete.setOnClickListener(this);
+
+    return convertView;
+}
+
+@Override
+public void onClick(View v) {
+    int position = Integer.parseInt(v.getTag() + "");
+    deleteWhere(position);
+    arr.remove(position);
+    notifyDataSetChanged();
+    // -- need to delete SQL data.
+
+}
+```
+
+**```viewHolder.btnDelete.setTag(position);```** has to be out side of if statement since position will update constantly.
+**```int position = Integer.parseInt(v.getTag() + "");```** is where they call the position value. using ```getTag()```
 
 <img src = "img/img1.png" width ="200" /> 
 <img src = "img/img2.png" width ="200" />
