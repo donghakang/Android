@@ -74,6 +74,6 @@ public class MainActivity extends AppCompatActivity {
 |type|description|
 |-|-|
 |```drawer.openDrawer(GravityCompat.START);```|This slides in the drawer layout|
+|```drawer.closeDrawer(GravityCompat.START);```|This closes the drawer layout|
 |```drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);```|This will disable availability of the slide gesture.|
 |```drawer.isDrawerOpen(GravityCompat.START)```|boolean to figure whether it is opened or not|
-|
