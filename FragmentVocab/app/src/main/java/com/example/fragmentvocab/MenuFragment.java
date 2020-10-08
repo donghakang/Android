@@ -10,17 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class VocabFragment extends Fragment {
-
-    
-    public VocabFragment() {
+public class MenuFragment extends Fragment {
+    public MenuFragment () {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.activity_vocab, container, false);
+        View layout = inflater.inflate(R.layout.activity_main, container, false);
+
+        Intent myIntent = new Intent(getActivity(), VocabActivity.class);
+        getActivity().startActivity(myIntent);
 
         return layout;
     }

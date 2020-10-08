@@ -17,13 +17,21 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+
+    // VIEW
+    public static final int FRAGMENT_A = 0;
+    public static final int FRAGMENT_B = 1;
+    public static final int FRAGMENT_C = 2;
+
+
+
     DrawerLayout drawer;
 
     // Menu
     ListView lv;
     ArrayList<String> menuList = new ArrayList<>();
 
-    /// - temp class for activity usage.
+
 
     // Fragment
     VocabFragment vocabFragment = new VocabFragment();
@@ -60,18 +68,27 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Log.d("dd", "내 정보");
                 break;
             case 1:
-                // finish 를 사용하면 stack 구조가 아닌, 전 화면을 없애는 역할을 해준다.
-                FragmentManager fm = getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-
-                // R.id.body_rl is in activity_main.xml. This is where fragment view shows up.
-                ft.replace(R.id.body_rl, vocabFragment);
-                ft.commit();
+                changeScrVocab();
                 Log.d("dd", "단어 게임하기");
                 break;
             case 2:
                 Log.d("dd", "설정");
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+    }
+
+    public void changeScrVocab() {
+        // finish 를 사용하면 stack 구조가 아닌, 전 화면을 없애는 역할을 해준다.
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        // R.id.body_rl is in activity_main.xml. This is where fragment view shows up.
+        ft.replace(R.id.body_rl, vocabFragment);
+        ft.commit();
     }
 }
