@@ -22,6 +22,7 @@ Handler handler = new Handler() {
 ## usage
 #### ```sendEmtpyMessage(0)```
 ```Java
+int count = 0;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +42,15 @@ Handler handler = new Handler() {
     @Override
     public void handleMessage(@NonNull Message msg) {
         super.handleMessage(msg);
-        for (int i = 0; i < 10; i++) {
-            handler.sendEmptyMessageDelayed(0, 1000);
-            Log.d("DEBUG", i);
-        }
+        handler.sendEmptyMessageDelayed(0, 1000);
+        Log.d("DEBUG", count);
+        count += 1;
         handler.removeMessages(0);
     }
 };
 ```
-```sendEmptyMessage(0)```을 부르고, 바로 handler 메소드로 들어간다. 들어갈때 루프를 이용해 10번동안 Log를 찍으며, ```sendEmptyMessageDelayed(0, 1000)```를 이용해서 각 루프마다 1초씩 딜레이를 시킨다.
-즉 일초 간격으로 로그에 0 부터 9를 프린트 할 것이다.
+```sendEmptyMessage(0)```을 부르고, 바로 handler 메소드로 들어간다. ```sendEmptyMessageDelayed(0, 1000)```를 이용해서 각 루프마다 1초씩 딜레이를 시킨다. 그 후 count 값을 변경 해주며
+즉 일초 간격으로 로그에 0 부터 계속 숫자를 증가시키며 프린트 할 것이다.
 
 #### ```sendEmptyMessageDelayed(0, 1000)```
 ```Java
