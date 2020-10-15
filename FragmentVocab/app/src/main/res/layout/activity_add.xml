@@ -32,7 +32,69 @@
                 android:textSize="20sp"
                 android:text="한국어"
                 android:layout_weight="1"/>
+            package com.example.day2;
 
+            import androidx.annotation.NonNull;
+            import androidx.annotation.Nullable;
+            import androidx.appcompat.app.AppCompatActivity;
+
+            import android.app.Activity;
+            import android.content.Context;
+            import android.os.Bundle;
+            import android.os.Handler;
+            import android.os.Message;
+            import android.util.Log;
+            import android.view.LayoutInflater;
+            import android.view.MotionEvent;
+            import android.view.View;
+            import android.view.ViewGroup;
+            import android.widget.AdapterView;
+            import android.widget.ArrayAdapter;
+            import android.widget.Button;
+            import android.widget.EditText;
+            import android.widget.ImageView;
+            import android.widget.ListView;
+            import android.widget.TextView;
+            import android.widget.Toast;
+
+            import com.example.day2.R;
+
+            import java.util.ArrayList;
+
+            public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+            ArrayList<String> arr = new ArrayList<>();
+            ListView mainLv;
+            Button btn;
+            EditText et;
+            ArrayAdapter adapter;
+
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+            btn = findViewById(R.id.btn);
+            et = findViewById(R.id.et);
+            mainLv = findViewById(R.id.mainLv);
+
+            arr.add("Car");
+            arr.add("dog");
+            arr.add("desk");
+            arr.add("build");
+
+            adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arr);
+            mainLv.setAdapter(adapter);        // ListView list = findViewById(R.id.list);
+
+            btn.setOnClickListener(this);
+            }
+
+            @Override
+            public void onClick(View v) {
+            String text = et.getText().toString();
+            arr.add(text);
+            adapter.notifyDataSetChanged();
+            }
+            }
         </LinearLayout>
 
         <Button
