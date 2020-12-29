@@ -56,7 +56,25 @@ try {
 
 click [here](https://www.json.org/json-en.html) for more info
 
-#### Examples
+#### Examples 
+```java
+try {
+  ...
+  JSONObject jsonObject1 = new JSONObject();
+  jsonObject1.put("name", "강동하");
+  jsonObject1.put("age", "26");
+ 
+  JSONObject jsonObject2 = new JSONObject();
+  jsonObject2.put("name", "강동하");
+  jsonObject2.put("age", "26");
+  
+  JSONArray arr = new JSONArray();
+  arr.put(jsonObject1);
+  arr.put(jsonObject2);
+
+```
+
+#### More Examples
 ``` JAVA
 {
   "vocabTitle":"단어장",
