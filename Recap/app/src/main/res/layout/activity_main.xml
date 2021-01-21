@@ -81,6 +81,7 @@
         android:layout_alignRight="@id/center">
 
         <Button
+            android:id="@+id/btn_moveon"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text=""/>

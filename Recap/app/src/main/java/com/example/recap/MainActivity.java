@@ -2,6 +2,7 @@ package com.example.recap;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText et_hobby;
 
     Button btnSubmit;
+    Button btnMoveOn;
 
     String name, age, hobby;
 
@@ -43,8 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         et_age = findViewById(R.id.et_age);
         et_hobby = findViewById(R.id.et_hobby);
 
-
+        btnMoveOn = findViewById(R.id.btn_moveon);
         btnSubmit = findViewById(R.id.btn_submit);
+        btnMoveOn.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
     }
 
@@ -74,6 +77,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             myReq.setRetryPolicy(new DefaultRetryPolicy(3000, 0, 1f));
             stringRequest.add(myReq);
+        } else if (v.getId() == R.id.btn_moveon) {
+            Intent intent = new Intent(this, com.example.recap.MyListActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
