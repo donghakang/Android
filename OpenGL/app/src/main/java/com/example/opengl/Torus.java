@@ -45,7 +45,6 @@ public class Torus {
                 verticesList.add(line);
             } else if(line.startsWith("f ")) {
                 // Add face line to faces list
-                Log.d("dddd", "Line: " + line);
                 facesList.add(line);
             }
         }
@@ -66,7 +65,7 @@ public class Torus {
         verticesBuffer = buffer1.asFloatBuffer();
 
         // Create buffer for faces
-        ByteBuffer buffer2 = ByteBuffer.allocateDirect(facesList.size() * 3 * 2);
+        ByteBuffer buffer2 = ByteBuffer.allocateDirect(facesList.size() * 4 * 2);
         buffer2.order(ByteOrder.nativeOrder());
         facesBuffer = buffer2.asShortBuffer();
 
@@ -88,25 +87,24 @@ public class Torus {
         verticesBuffer.position(0);
 
         for(String face: facesList) {
-            String vertexIndices[] = face.split(" |/");
-            Log.d("ddddd", "FACE: " + face);
-            Log.d("ddddd", "VERTEX: " + vertexIndices[1] + ", " + vertexIndices[2]);
-            short vertex1 = Short.parseShort(vertexIndices[1]);
-            short vertex2 = Short.parseShort(vertexIndices[2]);
-            short vertex3 = Short.parseShort(vertexIndices[3]);
-            Log.d("ddddd", "VERTEXX:" + vertex1 + ", " + vertex2 + ", " + vertex3);
-            facesBuffer.put((short)(vertex1 - 1));
-            facesBuffer.put((short)(vertex2 - 1));
-            facesBuffer.put((short)(vertex3 - 1));
+            String vertexIndices[] = face.split(" ");
 
-            c_f += 1;
+
+            for (int i = 0; i < 4; i ++) {
+                String faces = vertexIndices[i+1];
+                String faceIndices[] = faces.split("/");
+                short vertex1 = Short.parseShort(faceIndices[0]);
+                short vertex2 = Short.parseShort(faceIndices[1]);
+                short vertex3 = Short.parseShort(faceIndices[2]);
+
+                facesBuffer.put((short)(vertex1 - 1));
+//                facesBuffer.put((short)(vertex2 - 1));
+//                facesBuffer.put((short)(vertex3 - 1));
+
+                Log.d("eeeee", "faceindices: " + vertex1 + "  /  " + vertex2 + "  /  " + vertex3);
+            }
         }
         facesBuffer.position(0);
-
-
-
-        Log.d ("dddd", "DEFAULT : " + c_v + "     " + c_f);
-
 
 
 
@@ -178,8 +176,9 @@ public class Torus {
         GLES20.glUniformMatrix4fv(matrix, 1, false, productMatrix, 0);
 
         GLES20.glDrawElements(GLES20.GL_TRIANGLES,
-                facesList.size() * 3, GLES20.GL_UNSIGNED_SHORT, facesBuffer);
+                facesList.size() * 4, GLES20.GL_UNSIGNED_SHORT, facesBuffer);
 
         GLES20.glDisableVertexAttribArray(position);
     }
 }
+
