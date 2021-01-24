@@ -3,6 +3,8 @@ package com.example.opengl.entity;
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
+import android.os.SystemClock;
+import android.util.Log;
 
 import com.example.opengl.R;
 
@@ -23,6 +25,8 @@ import java.util.Vector;
 public class Object {
 
     private FloatBuffer verticesBuffer;
+    private FloatBuffer texturesBuffer;
+    private FloatBuffer normalsBuffer;
     private ShortBuffer facesBuffer;
 
     List<Float> vertices = new ArrayList<>();
@@ -30,7 +34,7 @@ public class Object {
     List<Float> textures = new ArrayList<>();
     List<String> faces = new ArrayList<>();
 
-
+    private int vPMatrixHandle;
 
     private int program;
 
@@ -41,7 +45,7 @@ public class Object {
 
         Scanner scanner = null;
         try {
-            scanner = new Scanner(ctx.getAssets().open("torus.obj"));
+            scanner = new Scanner(ctx.getAssets().open(file));
 
             while(scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -67,7 +71,8 @@ public class Object {
                         break;
                     case "f":
                         // faces: vertex/texture/normal
-                        if (parts.length < 4) {
+                        Log.d("dddd", "LEN: " + parts.length + "    " + parts[1] + " " + " " +  parts[2] + " " + parts[3]);
+                        if (parts.length < 5) {
                             faces.add(parts[1]);
                             faces.add(parts[2]);
                             faces.add(parts[3]);
@@ -96,28 +101,49 @@ public class Object {
         buffer1.order(ByteOrder.nativeOrder());
         verticesBuffer = buffer1.asFloatBuffer();
 
+//        // Create buffer for vertices
+//        ByteBuffer buffer2 = ByteBuffer.allocateDirect(textures.size() * 4);
+//        buffer2.order(ByteOrder.nativeOrder());
+//        texturesBuffer = buffer2.asFloatBuffer();
+//
+//        // Create buffer for vertices
+//        ByteBuffer buffer3 = ByteBuffer.allocateDirect(normals.size() * 4);
+//        buffer3.order(ByteOrder.nativeOrder());
+//        normalsBuffer = buffer3.asFloatBuffer();
+
+
         // Create buffer for faces
-        ByteBuffer buffer2 = ByteBuffer.allocateDirect(faces.size() * 2);
-        buffer2.order(ByteOrder.nativeOrder());
-        facesBuffer = buffer2.asShortBuffer();
+        ByteBuffer buffer4 = ByteBuffer.allocateDirect(faces.size() * 2);
+        buffer4.order(ByteOrder.nativeOrder());
+        facesBuffer = buffer4.asShortBuffer();
 
 
         // verticesBuffer.
         for (float v : vertices) {
             verticesBuffer.put(v);
         }
+//
+//        for (float t : textures) {
+//            texturesBuffer.put(t);
+//        }
+//
+//        for (float n : normals) {
+//            normalsBuffer.put(n);
+//        }
 
         // facesBuffer.
         for (String f : faces) {
             String[] parts = f.split("/");
             short position = Short.parseShort(parts[0]);
-            // short texture = Short.parseShort(parts[1]);
-            // short normal = Short.parseShort(parts[2]);
+            short texture = Short.parseShort(parts[1]);
+            short normal = Short.parseShort(parts[2]);
 
             facesBuffer.put((short)(position-1));
         }
 
         verticesBuffer.position(0);
+//        texturesBuffer.position(0);
+//        normalsBuffer.position(0);
         facesBuffer.position(0);
 
 
@@ -152,8 +178,6 @@ public class Object {
 
 
 
-
-
         program = GLES20.glCreateProgram();
         GLES20.glAttachShader(program, vertexShader);
         GLES20.glAttachShader(program, fragmentShader);
@@ -163,9 +187,15 @@ public class Object {
     }
 
 
-    public void draw() {
+
+    float colorValue[] = { 0.63671875f, 0.76953125f, 0.22265625f, 1.0f };
+
+
+    public void draw(float[] mvpMatrix) {
         // Drawing code goes here
-        int position = GLES20.glGetAttribLocation(program, "position");
+
+        // 포지션 적용
+        int position = GLES20.glGetAttribLocation(program, "a_Position");
         GLES20.glEnableVertexAttribArray(position);
 
         GLES20.glVertexAttribPointer(position,
@@ -176,24 +206,20 @@ public class Object {
                 verticesBuffer);
 
 
-        float[] projectionMatrix = new float[16];
-        float[] viewMatrix = new float[16];
-        float[] productMatrix = new float[16];
+        // 색깔 적용
+        int color = GLES20.glGetUniformLocation(program, "v_Color");
+        GLES20.glUniform4fv(color, 1, colorValue, 0);
 
-        Matrix.frustumM(projectionMatrix, 0,
-                -1, 1,
-                -1, 1,
-                2, 9);
-        Matrix.setLookAtM(viewMatrix, 0,
-                0, 3, -4,
-                0, 0, 0,
-                0, 1, 0);
-        Matrix.multiplyMM(productMatrix, 0,
-                projectionMatrix, 0,
-                viewMatrix, 0);
 
-        int matrix = GLES20.glGetUniformLocation(program, "matrix");
-        GLES20.glUniformMatrix4fv(matrix, 1, false, productMatrix, 0);
+
+        // 카메라 프로젝션
+        // get handle to shape's transformation matrix
+        vPMatrixHandle = GLES20.glGetUniformLocation(program, "u_MVPMatrix");
+
+        // Pass the projection and view transformation to the shader
+        GLES20.glUniformMatrix4fv(vPMatrixHandle, 1, false, mvpMatrix, 0);
+
+
 
         GLES20.glDrawElements(GLES20.GL_TRIANGLES,
                 faces.size(), GLES20.GL_UNSIGNED_SHORT, facesBuffer);

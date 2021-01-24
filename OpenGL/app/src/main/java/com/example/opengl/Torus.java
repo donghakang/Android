@@ -34,7 +34,7 @@ public class Torus {
 
         // Open the OBJ file with a Scanner
         Scanner scanner = null;
-        scanner = new Scanner(context.getAssets().open("torus.obj"));
+        scanner = new Scanner(context.getAssets().open("object.obj"));
 
 
         // Loop through all its lines
