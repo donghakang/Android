@@ -38,7 +38,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
         mTriangle = new Triangle();
-        mSquare = new Square();
+        mSquare = new Square(this.ctx, "merona.obj");
         mObj = new Object(this.ctx, "merona.obj");
     }
 
@@ -79,6 +79,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         // Note that the vPMatrix factor *must be first* in order
         // for the matrix multiplication product to be correct.
         Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0);
+
 
         mObj.draw(scratch);
     }
